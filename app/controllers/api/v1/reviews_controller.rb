@@ -1,4 +1,6 @@
 class Api::V1::ReviewsController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def create
     review = Review.new(review_params)
 
@@ -22,6 +24,6 @@ class Api::V1::ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:reviews).permit(:title, :description, :score, :airline_id)
+    params.require(:review).permit(:title, :description, :score, :airline_id)
   end
 end

@@ -1,4 +1,6 @@
 class Api::V1::AirlinesController < ApplicationController
+  protect_from_forgery with: :null_session
+
   def index
     airlines = Airline.all
 
