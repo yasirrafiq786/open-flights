@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import ReviewForm from './ReviewForm';
 import axios from 'axios';
 import Header from './Header';
 import styled from 'styled-components';
@@ -39,22 +40,38 @@ const Airline = (props) => {
       .catch((response) => console.log(response));
   }, []);
 
+  const handleChange = (e) => {
+    e.preventDefault;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault;
+  };
+
   return (
     <Wrapper>
-      <Column>
-        <Main>
-          {loaded && (
-            <Header
-              attributes={airline.data.attributes}
-              reviews={airline.included}
-            />
-          )}
-          <div className="reviews"></div>
-        </Main>
-      </Column>
-      <Column>
-        <div className="review-form">Review Form</div>
-      </Column>
+      {loaded && (
+        <React.Fragment>
+          <Column>
+            <Main>
+              <Header
+                attributes={airline.data.attributes}
+                reviews={airline.included}
+              />
+
+              <div className="reviews"></div>
+            </Main>
+          </Column>
+          <Column>
+            <div className="review-form">
+              <ReviewForm
+                handleChange={handleChange}
+                handleSubmit={handleSubmit}
+              />
+            </div>
+          </Column>
+        </React.Fragment>
+      )}
     </Wrapper>
   );
 };
