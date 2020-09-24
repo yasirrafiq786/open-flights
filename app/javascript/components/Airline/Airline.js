@@ -41,11 +41,21 @@ const Airline = (props) => {
   }, []);
 
   const handleChange = (e) => {
-    e.preventDefault;
+    e.preventDefault();
+    setReview(Object.assign({}, review, {[e.target.name]: e.target.value}));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault;
+    e.preventDefault();
+    const airline_id = airline.data.id;
+    axios
+      .post('/api/v1/reviews', {review, airline_id})
+      .then((response) => {
+          const included = [...airline.included, response.data.data]
+          setAirline(...airline, included)
+          setReview({title:'', description:'', score:0})
+        })
+      .catch((response) => console.log(response));
   };
 
   return (
@@ -67,6 +77,8 @@ const Airline = (props) => {
               <ReviewForm
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
+                attributes={airline.data.attributes}
+                review={review}
               />
             </div>
           </Column>
