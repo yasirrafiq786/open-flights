@@ -25,8 +25,8 @@ const Review = (props) => {
       <div className="rating-container">
         <div className="rating-score">{score}</div>
       </div>
-      <div className="title">{title}</div>
-      <div className="description">{description}</div>
+      <Title>{title}</Title>
+      <Description>{description}</Description>
     </Card>
   );
 };
