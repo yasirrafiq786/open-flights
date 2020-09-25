@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import ReviewForm from './ReviewForm';
+import Review from './Review';
 import axios from 'axios';
 import Header from './Header';
 import styled from 'styled-components';
@@ -63,6 +64,13 @@ const Airline = (props) => {
     setReview({...review, score});
   };
 
+  let reviews;
+  if (loaded && airline.included) {
+    reviews = airline.included.map((item, index) => {
+      return <Review key={index} attributes={item.attributes} />;
+    });
+  }
+
   return (
     <Wrapper>
       {loaded && (
@@ -74,7 +82,7 @@ const Airline = (props) => {
                 reviews={airline.included}
               />
 
-              <div className="reviews"></div>
+              {reviews}
             </Main>
           </Column>
           <Column>
