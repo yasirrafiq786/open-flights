@@ -51,11 +51,16 @@ const Airline = (props) => {
     axios
       .post('/api/v1/reviews', {review, airline_id})
       .then((response) => {
-          const included = [...airline.included, response.data.data]
-          setAirline(...airline, included)
-          setReview({title:'', description:'', score:0})
-        })
+        const included = [...airline.included, response.data.data];
+        setAirline({...airline, included});
+        setReview({title: '', description: '', score: 0});
+      })
       .catch((response) => console.log(response));
+  };
+
+  const setRating = (score, e) => {
+    e.preventDefault();
+    setReview({...review, score});
   };
 
   return (
@@ -79,6 +84,7 @@ const Airline = (props) => {
                 handleSubmit={handleSubmit}
                 attributes={airline.data.attributes}
                 review={review}
+                setRating={setRating}
               />
             </div>
           </Column>
