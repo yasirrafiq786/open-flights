@@ -1,11 +1,14 @@
 import React from 'react';
+import './Rating.css';
 
 const Rating = (props) => {
-    return (
-        <span className="star-wrapper">
-            <span className="stars"></span>
-        </span>
-    )
-}
+  const score = (props.score / 5) * 100;
+
+  return (
+    <span className="star-wrapper">
+      <span className="stars" style={{width: score + "%"}}></span>
+    </span>
+  );
+};
 
 export default Rating;
